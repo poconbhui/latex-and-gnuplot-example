@@ -1,0 +1,47 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{parskip}
+
+\begin{document}
+
+
+\section{Using The Plot}
+
+The gnuplot generated .tex file is included in a caption after this paragraph
+using the code
+%
+\begin{verbatim}
+\begin{figure}
+    \input{plot/plot}
+    \caption{Our lovely gnuplot plot!}
+\end{figure}
+\end{verbatim}
+%
+Note the absence of ``src/'' in the filename specification.
+The ``src'' directory has been included on the command line.
+
+
+The plot.tex file then has the line
+%
+\begin{verbatim}
+\includegraphics{src/plot/plot}
+\end{verbatim}
+%
+since the output file was specified with a relative name from
+the root directory.
+Since pdflatex is then also called from the root directory, it can find
+files in the ``src/plot'' path.
+The file ``src/plot/plot'' could refer to either the .pdf or .eps file.
+Since pdflatex can't handle .eps files, it loads the .pdf file.
+
+
+% Include the damn plot already!
+\begin{figure}
+    \input{plot/plot}
+    \caption{Our lovely gnuplot plot!}
+\end{figure}
+
+
+\end{document}
